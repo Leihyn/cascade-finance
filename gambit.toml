@@ -1,0 +1,75 @@
+# Gambit Mutation Testing Configuration
+# https://github.com/Certora/gambit
+
+[general]
+# Output directory for mutations
+outdir = "gambit_out"
+
+# Number of mutants to generate per file
+num_mutants = 50
+
+# Seed for reproducibility
+seed = 42
+
+# Mutation operators to apply
+operators = [
+    "binary-op-mutation",           # Replace binary operators (+, -, *, /, etc.)
+    "unary-op-mutation",            # Replace unary operators (!, -)
+    "comparison-op-mutation",       # Replace comparison operators (<, >, ==, etc.)
+    "logical-op-mutation",          # Replace logical operators (&&, ||)
+    "assignment-mutation",          # Modify assignment operators
+    "literal-mutation",             # Mutate literal values
+    "require-mutation",             # Mutate require statements
+    "swap-args-mutation",           # Swap function argument order
+    "delete-expression-mutation",   # Delete expressions
+]
+
+# Contracts to mutate
+[[contracts]]
+name = "PositionManager"
+path = "src/core/PositionManager.sol"
+num_mutants = 60
+
+[[contracts]]
+name = "SettlementEngine"
+path = "src/core/SettlementEngine.sol"
+num_mutants = 50
+
+[[contracts]]
+name = "MarginEngine"
+path = "src/risk/MarginEngine.sol"
+num_mutants = 50
+
+[[contracts]]
+name = "LiquidationEngine"
+path = "src/risk/LiquidationEngine.sol"
+num_mutants = 50
+
+[[contracts]]
+name = "RateOracle"
+path = "src/pricing/RateOracle.sol"
+num_mutants = 40
+
+[[contracts]]
+name = "FixedPointMath"
+path = "src/libraries/FixedPointMath.sol"
+num_mutants = 30
+
+# Files to exclude from mutation
+[exclude]
+paths = [
+    "src/mocks/*",
+    "src/interfaces/*",
+    "test/*",
+]
+
+# Test configuration
+[test]
+# Command to run tests
+command = "forge test"
+
+# Timeout per mutant (seconds)
+timeout = 120
+
+# Number of parallel test runs
+parallelism = 4
