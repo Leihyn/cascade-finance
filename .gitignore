@@ -21,3 +21,9 @@ scripts/node_modules/
 # OS files
 .DS_Store
 tmpclaude-*
+
+# Claude
+.claude/
+
+# Demo video (Remotion)
+cascade-video/
