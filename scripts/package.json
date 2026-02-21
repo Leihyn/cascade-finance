@@ -1,0 +1,12 @@
+{
+  "name": "irs-scripts",
+  "version": "1.0.0",
+  "description": "Helper scripts for IRS Protocol",
+  "scripts": {
+    "keeper": "node rate-keeper.js",
+    "keeper:once": "node rate-keeper.js --once"
+  },
+  "dependencies": {
+    "viem": "^2.15.1"
+  }
+}

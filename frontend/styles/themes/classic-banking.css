@@ -1,0 +1,714 @@
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   ROOT VARIABLES & THEME - BANKING ELEGANCE
+   ============================================ */
+:root {
+  /* Banking color palette */
+  --bg-primary: #0A1628;
+  --bg-secondary: #0F1F3A;
+  --bg-tertiary: #162844;
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  --accent-gold: #D4AF37;
+  --accent-gold-light: #F4E5B8;
+  --accent-navy: #1E3A8A;
+  --accent-royal: #3B82F6;
+  --accent-green: #059669;
+  --accent-emerald: #10B981;
+
+  --glass-bg: rgba(30, 58, 138, 0.15);
+  --glass-border: rgba(212, 175, 55, 0.15);
+  --glass-hover: rgba(30, 58, 138, 0.25);
+
+  --glow-gold: 0 8px 32px rgba(212, 175, 55, 0.25);
+  --glow-royal: 0 8px 32px rgba(59, 130, 246, 0.2);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   ANIMATED BACKGROUND - BANKING ELEGANCE
+   ============================================ */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(212, 175, 55, 0.08), transparent),
+    radial-gradient(ellipse 50% 40% at 80% 60%, rgba(30, 58, 138, 0.12), transparent),
+    radial-gradient(ellipse 60% 35% at 20% 85%, rgba(59, 130, 246, 0.06), transparent),
+    linear-gradient(135deg, #0A1628 0%, #0F1F3A 50%, #162844 100%);
+  animation: meshMove 30s ease-in-out infinite;
+}
+
+@keyframes meshMove {
+  0%, 100% {
+    background-position: 0% 0%, 100% 50%, 0% 100%;
+  }
+  50% {
+    background-position: 100% 0%, 0% 50%, 100% 100%;
+  }
+}
+
+/* Elegant floating orbs - subtle gold and navy */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.25;
+  animation: float 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.2), transparent 70%);
+  top: -150px;
+  left: -150px;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(30, 58, 138, 0.18), transparent 70%);
+  top: 40%;
+  right: -100px;
+  animation-delay: -4s;
+}
+
+.orb-3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%);
+  bottom: -80px;
+  left: 35%;
+  animation-delay: -8s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(3deg); }
+  66% { transform: translateY(15px) rotate(-3deg); }
+}
+
+/* ============================================
+   GLASSMORPHISM COMPONENTS
+   ============================================ */
+@layer components {
+  .glass {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-3xl;
+  }
+
+  .glass-card {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    @apply backdrop-blur-xl border border-white/[0.08] rounded-3xl transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    @apply border-white/[0.15] -translate-y-0.5;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-button {
+    @apply bg-white/[0.05] backdrop-blur-lg border border-white/[0.1] rounded-xl transition-all duration-200;
+  }
+
+  .glass-button:hover {
+    @apply bg-white/[0.1] border-white/[0.2];
+  }
+}
+
+/* ============================================
+   BANKING BUTTON EFFECTS
+   ============================================ */
+.glow-text {
+  text-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+}
+
+.glow-border {
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.neon-button {
+  position: relative;
+  background: linear-gradient(135deg, #D4AF37 0%, #C19A2E 100%);
+  border: 1px solid rgba(244, 229, 184, 0.3);
+  border-radius: 0.75rem;
+  color: #0A1628;
+  font-weight: 600;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+.neon-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #F4E5B8 0%, #D4AF37 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.neon-button:hover {
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+  transform: translateY(-2px);
+  border-color: rgba(244, 229, 184, 0.5);
+}
+
+.neon-button:hover::before {
+  opacity: 1;
+}
+
+.neon-button span {
+  position: relative;
+  z-index: 1;
+}
+
+.neon-button-secondary {
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #D4AF37;
+  box-shadow: none;
+}
+
+.neon-button-secondary:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: #D4AF37;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.2);
+}
+
+/* ============================================
+   GRADIENT TEXT - BANKING ELEGANCE
+   ============================================ */
+.gradient-text {
+  background: linear-gradient(135deg, #D4AF37 0%, #F4E5B8 50%, #C19A2E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-purple {
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   FORM INPUTS
+   ============================================ */
+.input-glass {
+  @apply bg-white/[0.03] border border-white/[0.1] rounded-xl text-white py-3.5 px-4 text-base transition-all duration-200 outline-none;
+}
+
+.input-glass::placeholder {
+  @apply text-slate-500;
+}
+
+.input-glass:focus {
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1), 0 4px 12px rgba(212, 175, 55, 0.15);
+  @apply bg-white/[0.05];
+}
+
+.input-glass:hover:not(:focus) {
+  @apply border-white/[0.2] bg-white/[0.05];
+}
+
+/* ============================================
+   TABS
+   ============================================ */
+.tab-glass {
+  @apply flex gap-1 p-1 bg-white/[0.03] rounded-2xl border border-white/[0.05];
+}
+
+.tab-item {
+  @apply py-3 px-6 rounded-xl font-medium text-slate-400 transition-all duration-200 cursor-pointer;
+}
+
+.tab-item:hover {
+  @apply text-white bg-white/[0.05];
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(30, 58, 138, 0.2) 100%);
+  @apply text-white;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* ============================================
+   STATS DISPLAY
+   ============================================ */
+.stat-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+  @apply border border-white/[0.05] rounded-2xl p-6 relative overflow-hidden;
+}
+
+.stat-card::before {
+  content: '';
+  @apply absolute top-0 left-0 right-0 h-px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+}
+
+.stat-value {
+  font-family: "Space Grotesk", sans-serif;
+  @apply text-3xl font-bold leading-none;
+}
+
+.stat-label {
+  @apply text-sm text-slate-500 mt-2;
+}
+
+/* ============================================
+   TABLE STYLES
+   ============================================ */
+.table-glass {
+  @apply w-full;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-glass th {
+  @apply text-left p-4 text-xs font-semibold uppercase tracking-wider text-slate-500 border-b border-white/[0.05];
+}
+
+.table-glass td {
+  @apply p-4 border-b border-white/[0.03] transition-colors duration-200;
+}
+
+.table-glass tbody tr:hover td {
+  @apply bg-white/[0.02];
+}
+
+/* ============================================
+   BADGES & TAGS
+   ============================================ */
+.badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+}
+
+.badge-success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-warning {
+  background: rgba(212, 175, 55, 0.15);
+  color: #D4AF37;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-info {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3B82F6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================
+   ANIMATIONS & TRANSITIONS
+   ============================================ */
+.hover-lift {
+  @apply transition-all duration-200;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.pulse-dot {
+  @apply w-2 h-2 rounded-full;
+  background: #10B981;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Toast animation */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(to right, #D4AF37, #F4E5B8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-gradient {
+    border: 1px solid transparent;
+    background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+                linear-gradient(135deg, #D4AF37, #3B82F6) border-box;
+  }
+
+  .focus-ring:focus {
+    @apply outline-none;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+  }
+
+  /* Number display styling */
+  .mono-numbers {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}
+
+/* Smooth page transitions */
+.page-transition {
+  animation: pageIn 0.4s ease-out;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton 1.5s ease-in-out infinite;
+  @apply rounded-lg;
+}
+
+@keyframes skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Rainbow border animation */
+.rainbow-border {
+  position: relative;
+}
+
+.rainbow-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    45deg,
+    #D4AF37,
+    #F4E5B8,
+    #3B82F6,
+    #1E3A8A,
+    #D4AF37
+  );
+  background-size: 400% 400%;
+  animation: rainbow 3s ease infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.rainbow-border:hover::before {
+  opacity: 1;
+}
+
+@keyframes rainbow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ============================================
+   MOBILE RESPONSIVENESS
+   ============================================ */
+
+/* Hide scrollbar for horizontal navigation */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Mobile-specific glass card adjustments */
+@media (max-width: 640px) {
+  .glass-card {
+    @apply rounded-2xl p-4;
+  }
+
+  .stat-value {
+    @apply text-2xl;
+  }
+
+  /* Reduce orb sizes on mobile */
+  .orb-1 {
+    width: 300px;
+    height: 300px;
+  }
+  .orb-2 {
+    width: 250px;
+    height: 250px;
+  }
+  .orb-3 {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Smaller neon button glow on mobile */
+  .neon-button:hover {
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+  }
+
+  /* Tighter input padding */
+  .input-glass {
+    @apply py-3 px-3;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+  /* Stack cards better */
+  .glass-card {
+    @apply rounded-2xl;
+  }
+
+  /* Reduce animation intensity for performance */
+  .bg-mesh {
+    animation-duration: 30s;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .glass-card {
+    @apply p-3;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Touch-friendly button sizing */
+@media (hover: none) and (pointer: coarse) {
+  .neon-button,
+  .glass-button {
+    min-height: 48px;
+  }
+
+  .tab-item {
+    min-height: 44px;
+    @apply px-4;
+  }
+
+  /* Disable hover effects on touch devices */
+  .hover-lift:hover {
+    transform: none;
+  }
+
+  .glass-card:hover {
+    transform: none;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .bg-mesh {
+    animation: none;
+  }
+
+  .orb {
+    animation: none;
+  }
+
+  .shimmer,
+  .skeleton,
+  .pulse-dot {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-card,
+  .glass,
+  .glass-button {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .text-slate-400,
+  .text-slate-500 {
+    color: #9ca3af;
+  }
+}
+
+/* Dark mode is default, but support light mode preference */
+@media (prefers-color-scheme: light) {
+  /* Could add light mode styles here if needed */
+}
+
+/* Print styles */
+@media print {
+  .bg-mesh,
+  .orb,
+  .orb-1,
+  .orb-2,
+  .orb-3 {
+    display: none !important;
+  }
+
+  .glass-card,
+  .glass {
+    background: white;
+    border-color: #e5e7eb;
+    box-shadow: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}
